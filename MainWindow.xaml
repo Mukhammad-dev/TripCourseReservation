@@ -5,8 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TripCourseReservation"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Trip and Course Reservation" Height="800" Width="708">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="205*"/>
+            <RowDefinition Height="214*"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.RowSpan="2">
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_File">
+                    <MenuItem Header="Import Data" />
+                    <MenuItem Header="Save" />
+                    <Separator />
+                    <MenuItem Header="Exit" />
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <Grid>
+            <Label Content="Trips" FontSize="36" Margin="10,10,502,306"/>
+            <ListBox HorizontalAlignment="Left" Height="244" VerticalAlignment="Top" Width="320" Margin="10,70,0,0"/>
+            <Button Content="Create Trip" HorizontalAlignment="Left" Margin="10,330,0,0" VerticalAlignment="Top" Width="80" Height="30"/>
+            <Button Content="Update Trip" HorizontalAlignment="Left" Margin="128,330,0,0" VerticalAlignment="Top" Width="80" Height="30" Click="Button_Click_1"/>
+            <Button Content="Delete Trip" HorizontalAlignment="Left" Margin="250,330,0,0" VerticalAlignment="Top" Width="80" Height="30"/>
+
+            <Label Content="Courses" FontSize="36" Margin="372,10,140,306"/>
+            <ListBox HorizontalAlignment="Left" Height="244" VerticalAlignment="Top" Width="320" Margin="370,70,0,0"/>
+            <Button Content="Create Course" HorizontalAlignment="Left" Margin="370,330,0,0" VerticalAlignment="Top" Width="80" Height="30"/>
+            <Button Content="Update Course" HorizontalAlignment="Left" Margin="493,330,0,0" VerticalAlignment="Top" Width="80" Height="30" Click="Button_Click_1"/>
+            <Button Content="Delete Course" HorizontalAlignment="Left" Margin="610,330,0,0" VerticalAlignment="Top" Width="80" Height="30"/>
+
+        </Grid>
+        <Border BorderBrush="Black" BorderThickness="1" Background="Black" Margin="-18,371,0,388" Cursor="None" Grid.RowSpan="2"/>
+        <Grid HorizontalAlignment="Left" Height="388" Margin="0,5,0,0" Grid.Row="1" VerticalAlignment="Top" Width="822"/>
+        <Label Content="Terms" FontSize="36" Height="60" Margin="10,10,10,323" Grid.Row="1"/>
+        <ListBox HorizontalAlignment="Left" Height="308" VerticalAlignment="Top" Width="680" Margin="10,75,0,0" Grid.Row="1"/>
+
+
     </Grid>
 </Window>
