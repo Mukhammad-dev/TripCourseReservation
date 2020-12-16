@@ -5,41 +5,46 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TripCourseReservation"
         mc:Ignorable="d"
-        Title="TripCreateWindow" Height="715" Width="355">
+        Title="TripCreateWindow" Height="760" Width="355">
     <Grid>
         <!--course details-->
         <Label Content="Trip Creation" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="34" Width="312" FontSize="18" FontWeight="Bold"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="11,56,0,0" FontSize="14"><Run Text="Title"/><Run Text="*"/></TextBlock>
-        <TextBox HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="227" Margin="101,58,0,0"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="11,97,0,0" FontSize="14" Text="Subtitle"/>
-        <TextBox HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="227" Margin="101,97,0,0"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="11,135,0,0" FontSize="14"><Run Text="Description"/><Run Text="*"/></TextBlock>
-        <TextBox HorizontalAlignment="Left" Height="70" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="227" Margin="101,136,0,0" />
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Transport" VerticalAlignment="Top" Margin="10,210,0,0" FontSize="14"/>
-        <RadioButton Content="Yes" HorizontalAlignment="Left" Margin="100,217,0,0" VerticalAlignment="Top" Width="50"/>
-        <RadioButton Content="No" HorizontalAlignment="Left" Margin="149,217,0,0" VerticalAlignment="Top" Width="50" />
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="11,52,0,0" FontSize="14"><Run Text="Code"/><Run Text="*"/></TextBlock>
+        <TextBox HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="227" Margin="101,93,0,0"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="11,91,0,0" FontSize="14"><Run Text="Title"/><Run Text="*"/></TextBlock>
+        <TextBox HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="227" Margin="101,54,0,0"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="11,132,0,0" FontSize="14" Text="Subtitle"/>
+        <TextBox HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="227" Margin="101,132,0,0"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="11,170,0,0" FontSize="14"><Run Text="Description"/><Run Text="*"/></TextBlock>
+        <TextBox HorizontalAlignment="Left" Height="70" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="227" Margin="101,171,0,0" />
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Transport" VerticalAlignment="Top" Margin="10,245,0,0" FontSize="14"/>
+        <RadioButton Content="Yes" HorizontalAlignment="Left" Margin="100,252,0,0" VerticalAlignment="Top" Width="50"/>
+        <RadioButton Content="No" HorizontalAlignment="Left" Margin="149,252,0,0" VerticalAlignment="Top" Width="50" />
 
         <!--terms-->
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,242,0,0" FontSize="14" Width="47"><Run FontWeight="Bold" Text="Term"/><Run FontWeight="Bold" Text="s"/></TextBlock>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,266,0,0" FontSize="14" Width="76" Text="Date from"/>
-        <DatePicker HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,264,0,0" Width="227"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,305,0,0" FontSize="14" Width="76"><Run Text="Date "/><Run Text="to"/></TextBlock>
-        <DatePicker HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,303,0,0" Width="227"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,342,0,0" FontSize="14" Width="76" Text="Price"/>
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="227" Margin="100,343,0,0" />
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,381,0,0" FontSize="14" Width="76" Text="Capacity"/>
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="227" Margin="100,382,0,0" />
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,420,0,0" FontSize="14" Width="86" Text="Pick-up place"/>
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="227" Margin="101,418,0,0" />
-        <Button Content="Add Term" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="253,451,0,0"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,277,0,0" FontSize="14" Width="47"><Run FontWeight="Bold" Text="Term"/><Run FontWeight="Bold" Text="s"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,301,0,0" FontSize="14" Width="76" Text="Date from"/>
+        <DatePicker HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,299,0,0" Width="227"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,340,0,0" FontSize="14" Width="76"><Run Text="Date "/><Run Text="to"/></TextBlock>
+        <DatePicker HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,338,0,0" Width="227"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,377,0,0" FontSize="14" Width="76" Text="Price"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="227" Margin="100,378,0,0" />
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,416,0,0" FontSize="14" Width="76" Text="Capacity"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="227" Margin="100,417,0,0" />
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Transport inc." VerticalAlignment="Top" Margin="10,452,0,0" FontSize="14"/>
+        <RadioButton Content="Yes" HorizontalAlignment="Left" Margin="100,456,0,0" VerticalAlignment="Top" Width="50"/>
+        <RadioButton Content="No" HorizontalAlignment="Left" Margin="149,456,0,0" VerticalAlignment="Top" Width="50" />
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,487,0,0" FontSize="14" Width="86" Text="Pick-up place"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="227" Margin="101,485,0,0" />
+        <Button Content="Add Term" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="253,518,0,0" Click="Button_Click"/>
         <!--terms list-->
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="9,476,0,0" FontSize="14" Width="150" Text="Terms of current course"/>
-        <ListBox HorizontalAlignment="Left" Height="122" VerticalAlignment="Top" Width="318" Margin="9,500,0,0"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="9,539,0,0" FontSize="14" Width="150" Text="Terms of current course"/>
+        <ListBox HorizontalAlignment="Left" Height="122" VerticalAlignment="Top" Width="318" Margin="9,563,0,0"/>
 
         <!--save a cancel buttons-->
-        <Button Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="252,636,0,0" Height="30"/>
-        <Button Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Margin="164,636,0,0" Height="30"/>
-       
+        <Button Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="252,693,0,0" Height="30"/>
+        <Button Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Margin="164,693,0,0" Height="30"/>
+
     </Grid>
 
 </Window>

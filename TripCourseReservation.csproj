@@ -102,14 +102,27 @@
     <Compile Include="CourseCreateWindow.xaml.cs">
       <DependentUpon>CourseCreateWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CourseUpdateWindow.xaml.cs">
+      <DependentUpon>CourseUpdateWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Course.cs" />
     <Compile Include="Entities\Term.cs" />
     <Compile Include="Entities\Trip.cs" />
+    <Compile Include="MainWindowAnother.xaml.cs">
+      <DependentUpon>MainWindowAnother.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RepoCreation.cs" />
     <Compile Include="TripCreateWindow.xaml.cs">
       <DependentUpon>TripCreateWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TripUpdateWindow.xaml.cs">
+      <DependentUpon>TripUpdateWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="CourseCreateWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CourseUpdateWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -125,7 +138,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MainWindowAnother.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="TripCreateWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TripUpdateWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

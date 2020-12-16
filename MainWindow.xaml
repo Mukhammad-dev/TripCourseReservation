@@ -18,6 +18,14 @@
                     <MenuItem Header="Save" />
                     <Separator />
                     <MenuItem Header="Exit" />
+                    <TabControl Height="100" Width="100">
+                        <TabItem Header="TabItem">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                        <TabItem Header="TabItem">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                    </TabControl>
                 </MenuItem>
             </Menu>
         </DockPanel>

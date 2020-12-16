@@ -15,23 +15,13 @@ using System.Windows.Shapes;
 namespace TripCourseReservation
 {
     /// <summary>
-    /// Interaction logic for TripCreateWindow.xaml
+    /// Interaction logic for CourseUpdateWindow.xaml
     /// </summary>
-    public partial class TripCreateWindow : Window
+    public partial class CourseUpdateWindow : Window
     {
-        public TripCreateWindow()
+        public CourseUpdateWindow()
         {
             InitializeComponent();
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
