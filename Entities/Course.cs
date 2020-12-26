@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace TripCourseReservation.Entities
 {
-    class Course
+    public class Course : EventPoperties
     {
-        public string Title { get; set; }
-        public string Code { get; set; }
-        public string Description { get; set; }
-        public bool CanContainTransport { get; set; }
         public string Trainer { get; set; }
         public List<Term> Terms { get; set; }
     }

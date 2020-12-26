@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TripCourseReservation.Entities;
 
-namespace TripCourseReservation.Entities
+namespace TripCourseReservation.View_Models
 {
-    public class Trip : EventPoperties
+    public class MainWindowsVM
     {
-        public string Subtitle { get; set; }
         public List<Term> Terms { get; set; }
     }
 }

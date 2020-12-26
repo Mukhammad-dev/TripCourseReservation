@@ -15,11 +15,12 @@ using System.Windows.Shapes;
 namespace TripCourseReservation
 {
     /// <summary>
-    /// Interaction logic for CourseCreateWindow.xaml
+    /// Interaction logic for TripCreateWindow.xaml
     /// </summary>
-    public partial class CourseCreateWindow : Window
+    public partial class TripCreateWindow : Window
     {
-        public CourseCreateWindow()
+        CourseCreateWindow courseCreateWindow = new CourseCreateWindow();
+        public TripCreateWindow()
         {
             InitializeComponent();
         }
@@ -29,24 +30,9 @@ namespace TripCourseReservation
 
         }
 
-        private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
+            courseCreateWindow.Show();
         }
     }
 }
