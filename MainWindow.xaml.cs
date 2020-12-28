@@ -18,10 +18,13 @@ namespace TripCourseReservation
         #region Properties
         CourseCreateWindow courseCreateWindow;
         CourseUpdateWindow courseUpdateWindow;
+        TripCreateWindow tripCreateWindow;
+        TripUpdateWindow tripUpdateWindow;
 
         private ICourseCRUD _courseCRUD = new XmlCRUD();
         private ITripCRUD _tripCRUD = new XmlCRUD();
         DataValidation dataValidation = new DataValidation();
+        TripDataValidation tripDataValidation = new TripDataValidation();
 
         private static readonly string connectionString_1 = ConfigurationManager.ConnectionStrings["courses"].ConnectionString;
         private static readonly string coursesDataRepoPath = connectionString_1.Substring(connectionString_1.IndexOf('=') + 1);
@@ -36,14 +39,16 @@ namespace TripCourseReservation
             InitializeComponent();
             RepoCreation.createDataFile(pathes);
             InitializeCourseData();
+            InitializeTripData();
             DataContext = new MainWindowsVM();
         }
         #endregion
 
         #region Events
+        //Course events 
         private void onCoursesSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            RefreshTerms();
+            RefreshCourseTerms();
         }
 
         private void CreateCourse(object sender, RoutedEventArgs e)
@@ -68,7 +73,7 @@ namespace TripCourseReservation
                 courseUpdateWindow.InitializeCourseData();
                 courseUpdateWindow.ShowDialog();
                 Terms.ItemsSource = null;
-                RefreshTerms();
+                RefreshCourseTerms();
                 Courses.ItemsSource = _courseCRUD.ReadCoursesData();
             }
         }
@@ -87,18 +92,56 @@ namespace TripCourseReservation
             }            
         }
 
-        private void UpdateTrip(object sender, RoutedEventArgs e)
+        //Trip events
+        private void onTripsSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            RefreshTripTerms();
         }
 
         private void CreateTrip(object sender, RoutedEventArgs e)
         {
-            
+            tripCreateWindow = new TripCreateWindow();
+            tripCreateWindow.ShowDialog();
+            InitializeTripData();
+        }
+
+        private void UpdateTrip(object sender, RoutedEventArgs e)
+        {
+            tripUpdateWindow = new TripUpdateWindow();
+            Trip trip = (Trip)Trips.SelectedItem;
+
+            if (trip == null)
+            {
+                MessageBox.Show("Please select the trip from the Trips listbox");
+            }
+            else
+            {
+                tripUpdateWindow.trip = trip;
+                tripUpdateWindow.InitializeTripData();
+                tripUpdateWindow.ShowDialog();
+                Terms.ItemsSource = null;
+                RefreshTripTerms();
+                Trips.ItemsSource = _tripCRUD.ReadTripsData();
+            }
+        }
+
+        private void DeleteTrip(object sender, RoutedEventArgs e)
+        {
+            Trip trip = (Trip)Trips.SelectedItem;
+            if (trip == null)
+            {
+                MessageBox.Show("Please select the course from the Trips listbox");
+            }
+            else
+            {
+                _tripCRUD.RemoveTrip(trip);
+                InitializeTripData();
+            }
         }
         #endregion
 
         #region Methods
+        //Load courses data
         private void InitializeCourseData()
         {
             var data = dataValidation.CheckIfDataExist();
@@ -108,7 +151,7 @@ namespace TripCourseReservation
             }
         }
 
-        private void RefreshTerms()
+        private void RefreshCourseTerms()
         {
             Course course = (Course)Courses.SelectedItem;
             var courses = _courseCRUD.ReadCoursesData();
@@ -117,6 +160,28 @@ namespace TripCourseReservation
             {
                 Course selectedCourse = courses.Find(cr => cr.Code == course.Code);
                 Terms.ItemsSource = selectedCourse.Terms;
+            }
+        }
+
+        //Load trips data
+        private void InitializeTripData()
+        {
+            var data = tripDataValidation.CheckIfTripDataExist();
+            if (data)
+            {
+                Trips.ItemsSource = _tripCRUD.ReadTripsData();
+            }
+        }
+
+        private void RefreshTripTerms()
+        {
+            Trip trip = (Trip)Trips.SelectedItem;
+            var trips = _tripCRUD.ReadTripsData();
+
+            if (trip != null)
+            {
+                Trip selectedTrip = trips.Find(cr => cr.Code == trip.Code);
+                Terms.ItemsSource = selectedTrip.Terms;
             }
         }
         #endregion

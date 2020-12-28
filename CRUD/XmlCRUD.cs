@@ -186,17 +186,23 @@ namespace TripCourseReservation
 
         #endregion
 
+
         #region Trip CRUD methods
-
-        public void CreateTrip(List<Trip> trip)
+        public void CreateTrip(Trip trip)
         {
-            XmlSerializer xsTrip = new XmlSerializer(typeof(Trip));
-
+            var trips = new List<Trip>();
+            trips.Add(trip);
+            XmlSerializer xsTrip = new XmlSerializer(typeof(List<Trip>));
             TextWriter txtWritter = new StreamWriter(@tripsDataRepoPath);
-
-            xsTrip.Serialize(txtWritter, trip);
-
+            xsTrip.Serialize(txtWritter, trips);
             txtWritter.Close();
+
+            XNamespace i = "http://www.w3.org/2001/XMLSchema-instance";
+            XDocument xdoc = XDocument.Load(@tripsDataRepoPath);
+            xdoc.Descendants()
+                       .Where(node => (string)node.Attribute(i + "nil") == "true")
+                       .Remove();
+            xdoc.Save(@tripsDataRepoPath);
         }
 
         public List<Trip> ReadTripsData()
@@ -205,16 +211,22 @@ namespace TripCourseReservation
             XmlSerializer formatter = new XmlSerializer(typeof(List<Trip>));
             using (FileStream fs = new FileStream(tripsDataRepoPath, FileMode.OpenOrCreate))
             {
-                tripsData = (List<Trip>)formatter.Deserialize(fs);
+                try
+                {
+                    tripsData = (List<Trip>)formatter.Deserialize(fs);
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
             }
-
             return tripsData;
         }
 
         public void AddTrip(Trip trip)
         {
             xDoc.Load(tripsDataRepoPath);
-            var rootNode = xDoc.GetElementsByTagName("ArrayOfCourse")[0];
+            var rootNode = xDoc.GetElementsByTagName("ArrayOfTrip")[0];
             var nav = rootNode.CreateNavigator();
             var emptyNamepsaces = new XmlSerializerNamespaces(new[] {
             XmlQualifiedName.Empty
@@ -230,68 +242,62 @@ namespace TripCourseReservation
             xDoc.Save(@tripsDataRepoPath);
         }
 
-        //public void CreateCourse(Course course)
-        //{
-        //    StringBuilder sb = new StringBuilder();
-        //    sb.Append("<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
-        //                "<ArrayOfCourse><Course>" +
-        //                "<Title>" + course.Title + "</Title>" +
-        //                "<Code>" + course.Code + "</Code>" +
-        //                "<Description>" + course.Description + "</Description>" +
-        //                "<CanContainTransport>" + course.CanContainTransport.ToString().ToLower() + "</CanContainTransport>" +
-        //                "<Trainer>" + course.Trainer + "</Trainer>");
-        //    foreach (Term term in course.Terms)
-        //    {
-        //        sb.Append("<Terms>" +
-        //                      "<Term>" +
-        //                          "<Event>" + term.Event + "</Event>" +
-        //                          "<DateFrom>" + term.DateFrom + "</DateFrom>" +
-        //                          "<DateTo>" + term.DateTo + "</DateTo>" +
-        //                          "<Price>" + term.Price.ToString() + "</Price>" +
-        //                          "<Capacity>" + term.Capacity.ToString() + "</Capacity>");
-        //        if (course.CanContainTransport)
-        //        {
-        //            sb.Append("<TransportIncluded>" + term.TransportIncluded.ToString().ToLower() + "</TransportIncluded>");
-        //            if (term.TransportIncluded)
-        //                sb.Append("<PickUpPlace>" + term.PickUpPlace + "</PickUpPlace>");
-        //        }
-        //        sb.Append("</Term>" +
-        //               "</Terms>");
-        //    }
-        //    sb.Append("</Course></ArrayOfCourse>");
-
-        //    //Create the XmlDocument.  
-        //    XmlDocument doc = new XmlDocument();
-        //    //doc.LoadXml((sb.ToString()));
-        //    doc.LoadXml((Convert.ToString(sb)));
-        //    //Save the document to a file.  
-        //    doc.Save(dataRepoPathes[0]);
-        //}
-
         public void UpdateTripData(Trip trip)
         {
             XDocument xdoc = XDocument.Load(tripsDataRepoPath);
-            XElement root = xdoc.Element("ArrayOfCourse");
+            XElement root = xdoc.Element("ArrayOfTrip");
 
-           
+            foreach (XElement xe in root.Elements("Trip").ToList())
+            {
+                if (xe.Element("Code").Value == trip.Code)
+                {
+                    xe.Element("Title").Value = trip.Title;
+                    xe.Element("Subtitle").Value = trip.Subtitle;
+                    xe.Element("Code").Value = trip.Code;
+                    xe.Element("Description").Value = trip.Description;
+                    xe.Element("CanContainTransport").Value = trip.CanContainTransport.ToString().ToLower();
+                    xe.Element("Terms").RemoveNodes();
+                    foreach (Term term in trip.Terms)
+                    {
+                        XElement xmlTerm = new XElement("Term",
+                                                new XElement("Event", term.Event),
+                                                new XElement("DateFrom", term.DateFrom),
+                                                new XElement("DateTo", term.DateTo),
+                                                new XElement("Price", term.Price),
+                                                new XElement("Capacity", term.Capacity));
+
+                        if (trip.CanContainTransport)
+                        {
+                            xmlTerm.Add(new XElement("TransportIncluded", term.TransportIncluded.ToString().ToLower()));
+                            if (term.TransportIncluded ?? true)
+                                xmlTerm.Add(new XElement("PickUpPlace", term.PickUpPlace));
+                        }
+                        xe.Element("Terms").Add(xmlTerm);
+                    }
+                }
+            }
+            xdoc.Save(tripsDataRepoPath);
         }
 
-        public void RemoveTrip(Trip trip)
+        public void RemoveData(Trip trip)
         {
             XDocument xdoc = XDocument.Load(tripsDataRepoPath);
-            XElement root = xdoc.Element("ArrayOfCourse");
+            XElement root = xdoc.Element("ArrayOfTrip");
 
-            foreach (XElement xe in root.Elements("Course").ToList())
+            foreach (XElement xe in root.Elements("Trip").ToList())
             {
                 if (xe.Element("Code").Value == trip.Code)
                 {
                     xe.Remove();
                 }
             }
-
             xdoc.Save(tripsDataRepoPath);
         }
 
+        public void RemoveTrip(Trip trip)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

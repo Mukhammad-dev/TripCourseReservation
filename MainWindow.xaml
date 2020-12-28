@@ -22,12 +22,14 @@
             </Menu>
         </DockPanel>
         <Grid>
+            <!--trips side-->
             <Label Content="Trips" FontSize="36" Margin="10,10,502,306"/>
-            <ListBox HorizontalAlignment="Left" Height="244" VerticalAlignment="Top" Width="320" Margin="10,70,0,0"/>
+            <ListBox x:Name="Trips" DisplayMemberPath="Title" SelectionChanged="onTripsSelectionChanged" HorizontalAlignment="Left" Height="244" VerticalAlignment="Top" Width="320" Margin="10,70,0,0"/>
             <Button Content="Create Trip" HorizontalAlignment="Left" Margin="10,330,0,0" VerticalAlignment="Top" Width="80" Height="30" Click="CreateTrip"/>
             <Button Content="Update Trip" HorizontalAlignment="Left" Margin="128,330,0,0" VerticalAlignment="Top" Width="80" Height="30" Click="UpdateTrip"/>
-            <Button Content="Delete Trip" HorizontalAlignment="Left" Margin="250,330,0,0" VerticalAlignment="Top" Width="80" Height="30"/>
+            <Button Content="Delete Trip" HorizontalAlignment="Left" Margin="250,330,0,0" VerticalAlignment="Top" Width="80" Height="30" Click="DeleteTrip"/>
 
+            <!--courses side-->
             <Label Content="Courses" FontSize="36" Margin="372,10,140,306"/>
             <ListBox x:Name="Courses" DisplayMemberPath="Title" SelectionChanged="onCoursesSelectionChanged" HorizontalAlignment="Left" Height="244" VerticalAlignment="Top" Width="320" Margin="370,70,0,0"/>
             <Button Content="Create Course" HorizontalAlignment="Left" Margin="370,330,0,0" VerticalAlignment="Top" Width="80" Height="30" Click="CreateCourse"/>

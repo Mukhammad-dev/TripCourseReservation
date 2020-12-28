@@ -52,7 +52,7 @@
         <Button x:Name="Update_Term" Content="Update Term" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="253,489,0,0" Click="Update_Term_Click"/>
         <!--terms list-->
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="9,514,0,0" FontSize="14" Width="150" Text="Terms of current course"/>
-        <ListBox x:Name="Terms" DisplayMemberPath="Event" SelectionChanged="onTermsSelectionChanged"  HorizontalAlignment="Left" Height="122" VerticalAlignment="Top" Width="318" Margin="9,538,0,0"/>
+        <ListBox x:Name="Terms" DisplayMemberPath="Event" SelectionChanged="onTermsSelectionChanged" HorizontalAlignment="Left" Height="122" VerticalAlignment="Top" Width="318" Margin="9,538,0,0"/>
         <!--save a cancel buttons-->
         <Button Content="Save Changes" HorizontalAlignment="Left" VerticalAlignment="Top" Width="85" Margin="162,674,0,0" Height="30" Click="onSaveChanges"/>
         <Button Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="252,674,0,0" Height="30" Click="onCancel"/>

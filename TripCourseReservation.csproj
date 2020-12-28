@@ -130,7 +130,9 @@
     <Compile Include="MainWindowAnother.xaml.cs">
       <DependentUpon>MainWindowAnother.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Shared\TripDataValidation.cs" />
     <Compile Include="Shared\ObservableObject.cs" />
+    <Compile Include="View Models\TripVM.cs" />
     <Compile Include="View Models\CourseVM.cs" />
     <Compile Include="View Models\MainWindowsVM.cs" />
     <Compile Include="Windows\CourseCreateWindow.xaml.cs">

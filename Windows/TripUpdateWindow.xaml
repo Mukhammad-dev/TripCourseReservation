@@ -4,45 +4,60 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TripCourseReservation"
+        xmlns:local1="clr-namespace:TripCourseReservation.View_Models"
         mc:Ignorable="d"
         Title="TripUpdateWindow" Height="745" Width="348">
+    <Window.DataContext>
+        <local1:TripVM/>
+    </Window.DataContext>
     <Grid>
-        <!--course details-->
+        <!--trip details-->
         <Label Content="Trip Update" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="34" Width="312" FontSize="18" FontWeight="Bold"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="11,56,0,0" FontSize="14"><Run Text="Title"/><Run Text="*"/></TextBlock>
-        <TextBox HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="227" Margin="101,58,0,0"/>
+        <TextBox x:Name="Title" Text="{Binding Title, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource errorTemplate}"
+                 HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" VerticalAlignment="Top" Width="227" Margin="101,58,0,0"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="11,97,0,0" FontSize="14" Text="Subtitle"/>
-        <TextBox HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="227" Margin="101,97,0,0"/>
+        <TextBox x:Name="Subtitle" Text="{Binding Subtitle, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource errorTemplate}"
+                 HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" VerticalAlignment="Top" Width="227" Margin="101,97,0,0"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="11,135,0,0" FontSize="14"><Run Text="Description"/><Run Text="*"/></TextBlock>
-        <TextBox HorizontalAlignment="Left" Height="70" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="227" Margin="101,136,0,0" />
+        <TextBox x:Name="Description" Text="{Binding Description, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource errorTemplate}" 
+                 HorizontalAlignment="Left" Height="70" TextWrapping="Wrap" VerticalAlignment="Top" Width="227" Margin="101,136,0,0" />
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Transport" VerticalAlignment="Top" Margin="10,213,0,0" FontSize="14"/>
-        <RadioButton Content="Yes" HorizontalAlignment="Left" Margin="100,217,0,0" VerticalAlignment="Top" Width="50"/>
-        <RadioButton Content="No" HorizontalAlignment="Left" Margin="149,217,0,0" VerticalAlignment="Top" Width="50" />
+        <RadioButton GroupName="TR" x:Name="Tr_Yes" Content="Yes" Click="Tr_Yes_Click" HorizontalAlignment="Left" Margin="100,217,0,0" VerticalAlignment="Top" Width="50"/>
+        <RadioButton GroupName="TR" x:Name="Tr_No" Content="No" Checked="Tr_No_Checked" HorizontalAlignment="Left" Margin="149,217,0,0" VerticalAlignment="Top" Width="50" />
 
         <!--terms-->
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,242,0,0" FontSize="14" Width="47"><Run FontWeight="Bold" Text="Term"/><Run FontWeight="Bold" Text="s"/></TextBlock>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,266,0,0" FontSize="14" Width="76" Text="Date from"/>
-        <DatePicker HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,264,0,0" Width="227"/>
+        <DatePicker Name="DateFrom" Text="{Binding DateFrom, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource errorTemplate}"
+                    HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,264,0,0" Width="227"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,305,0,0" FontSize="14" Width="76"><Run Text="Date "/><Run Text="to"/></TextBlock>
-        <DatePicker HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,303,0,0" Width="227"/>
+        <DatePicker Name="DateTo" Text="{Binding DateTo, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource errorTemplate}"
+                    HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100,303,0,0" Width="227"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,342,0,0" FontSize="14" Width="76" Text="Price"/>
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="227" Margin="100,343,0,0" />
+        <TextBox x:Name="Price" Text="{Binding Price, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource errorTemplate}" 
+                 HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="227" Margin="100,343,0,0" />
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,381,0,0" FontSize="14" Width="76" Text="Capacity"/>
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="227" Margin="100,382,0,0" />
+        <TextBox x:Name="Capacity" Text="{Binding Capacity, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource errorTemplate}"
+                 HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="227" Margin="100,382,0,0" />
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Transport inc." VerticalAlignment="Top" Margin="10,422,0,0" FontSize="14"/>
-        <RadioButton Content="Yes" HorizontalAlignment="Left" Margin="100,425,0,0" VerticalAlignment="Top" Width="50"/>
-        <RadioButton Content="No" HorizontalAlignment="Left" Margin="149,425,0,0" VerticalAlignment="Top" Width="50" />
+        <RadioButton GroupName="TR_Inc" x:Name="Tr_Inc_Yes" Content="Yes" IsEnabled="{Binding ElementName=Tr_Yes, Path=IsChecked}" IsEnabledChanged="Tr_Inc_Yes_IsEnabledChanged"
+                     HorizontalAlignment="Left" Margin="100,425,0,0" VerticalAlignment="Top" Width="50"/>
+        <RadioButton GroupName="TR_Inc" x:Name="Tr_Inc_No" Content="No" IsEnabled="{Binding ElementName=Tr_Yes, Path=IsChecked}" IsEnabledChanged="Tr_Inc_No_IsEnabledChanged" IsChecked="True"
+                     HorizontalAlignment="Left" Margin="149,425,0,0" VerticalAlignment="Top" Width="50" />
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,457,0,0" FontSize="14" Width="86" Text="Pick-up place"/>
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="227" Margin="101,455,0,0" />
-        <Button Content="Add Term" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="253,488,0,0"/>
-        <Button Content="Delete Term" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="172,488,0,0"/>
+        <TextBox x:Name="PickUpPlace" IsEnabled="{Binding ElementName=Tr_Inc_Yes, Path=IsChecked}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="227" Margin="101,455,0,0" />
+        <Button x:Name="Clear_Term" Content="New Term" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,489,0,0" Click="Clear_Term_Click"/>
+        <Button Content="Delete Term" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="172,489,0,0" Click="onDeleteTerm"/>
+        <Button x:Name="Add_Term" Content="Add Term" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="253,489,0,0" Click="Add_Term_Click" />
+        <Button x:Name="Update_Term" Content="Update Term" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="253,489,0,0" Click="Update_Term_Click"/>
         <!--terms list-->
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="9,513,0,0" FontSize="14" Width="150" Text="Terms of current course"/>
-        <ListBox HorizontalAlignment="Left" Height="122" VerticalAlignment="Top" Width="318" Margin="9,537,0,0"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="9,513,0,0" FontSize="14" Width="150" Text="Terms of current tpi["/>
+        <ListBox x:Name="Terms" DisplayMemberPath="Event" SelectionChanged="onTermsSelectionChanged" HorizontalAlignment="Left" Height="122" VerticalAlignment="Top" Width="318" Margin="9,537,0,0"/>
 
         <!--save a cancel buttons-->
-        <Button Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="252,673,0,0" Height="30"/>
-        <Button Content="Save Changes" HorizontalAlignment="Left" VerticalAlignment="Top" Width="85" Margin="162,673,0,0" Height="30"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="252,673,0,0" Height="30" Click="onSaveChanges"/>
+        <Button Content="Save Changes" HorizontalAlignment="Left" VerticalAlignment="Top" Width="85" Margin="162,673,0,0" Height="30" Click="onCancel"/>
 
     </Grid>
 </Window>

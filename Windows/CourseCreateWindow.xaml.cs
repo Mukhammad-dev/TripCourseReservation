@@ -29,11 +29,13 @@ namespace TripCourseReservation
         #region Constructor
         public CourseCreateWindow()
         {
+            InitializeComponent();
             isAnyDataInXmlFile = dataValidation.CheckIfDataExist(); 
 
-            InitializeComponent();
+            
             InitializeDefaults();
             SaveButtonAbility();
+            DataContext = new CourseVM();
         }
         #endregion
 

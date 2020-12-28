@@ -9,7 +9,7 @@ namespace TripCourseReservation.CRUD
 {
     public interface ITripCRUD
     {
-        void CreateTrip(List<Trip> courses);
+        void CreateTrip(Trip trip);
         List<Trip> ReadTripsData();
         void AddTrip(Trip trip);
         void UpdateTripData(Trip trip);

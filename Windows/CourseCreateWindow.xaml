@@ -50,7 +50,7 @@
         <TextBox x:Name="PickUpPlace" IsEnabled="{Binding ElementName=Tr_Inc_Yes, Path=IsChecked}" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="227" Margin="101,479,0,0"/>
         <Button Content="Add Term" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="253,512,0,0" Click="onSaveTerm"/>
         <!--terms list-->
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="9,537,0,0" FontSize="14" Width="150" Text="Terms of current course"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="9,537,0,0" FontSize="14" Width="150" Text="Terms of current trip"/>
         <ListBox x:Name="Terms" DisplayMemberPath="Event" HorizontalAlignment="Left" Height="122" VerticalAlignment="Top" Width="318" Margin="9,561,0,0"/>
         <!--save a cancel buttons-->
         <Button x:Name="Save" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Margin="164,692,0,0" Height="30" Click="onSave"/>
