@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using TripCourseReservation.CRUD;
@@ -20,7 +21,7 @@ namespace TripCourseReservation
 
         Course course = new Course();
         List<Term> terms = new List<Term>();
-        DataValidation dataValidation = new DataValidation();
+        CourseDataValidation courseDataValidation = new CourseDataValidation();
         StringBuilder errorMessage = new StringBuilder();
         bool isAnyDataInXmlFile = false;
 
@@ -30,7 +31,7 @@ namespace TripCourseReservation
         public CourseCreateWindow()
         {
             InitializeComponent();
-            isAnyDataInXmlFile = dataValidation.CheckIfDataExist(); 
+            isAnyDataInXmlFile = courseDataValidation.CheckIfDataExist(); 
 
             
             InitializeDefaults();
@@ -68,13 +69,20 @@ namespace TripCourseReservation
             {
                 if (ValidateTermFieldData())
                 {
-                    errorMessage.Clear();
                     MessageBox.Show(errorMessage.ToString());
+                }
+                else if(terms.Any(tr => tr.DateFrom == DateFrom.SelectedDate
+                                    && tr.DateTo == DateTo.SelectedDate
+                                    && tr?.TransportIncluded == IsTransportIncluded()))
+                {
+                    MessageBox.Show("The term with the same Dates already exists!");
                 }
                 else
                 {
                     Terms.ItemsSource = null;
                     Terms.ItemsSource = AddTerm();
+                    Yes.IsEnabled = false;
+                    No.IsEnabled = false;
                     ClearTermsField();
                     SaveButtonAbility();
                 }
@@ -83,8 +91,8 @@ namespace TripCourseReservation
 
         private void onSave(object sender, RoutedEventArgs e)
         {
-            if (dataValidation.ValidateCourseBasicData(Title.Text, Description.Text, Trainer.Text, Code.Text, ref errorMessage)
-                || dataValidation.CheckIfTermExists(terms, ref errorMessage))
+            if (courseDataValidation.ValidateCourseBasicData(Title.Text, Description.Text, Trainer.Text, Code.Text, ref errorMessage)
+                || courseDataValidation.CheckIfTermExists(terms, ref errorMessage))
             {
                 MessageBox.Show(errorMessage.ToString());
             }
@@ -122,7 +130,7 @@ namespace TripCourseReservation
 
         private bool ValidateTermFieldData()
         {
-            return dataValidation.ValidateTermFieldData(DateFrom.SelectedDate, DateTo.SelectedDate, Price.Text, Capacity.Text, ref errorMessage);
+            return courseDataValidation.ValidateTermFieldData(DateFrom.SelectedDate, DateTo.SelectedDate, Price.Text, Capacity.Text, PickUpPlace.Text, IsTransportIncluded(), ref errorMessage) ;
         }
 
         private List<Term> AddTerm()
@@ -175,7 +183,7 @@ namespace TripCourseReservation
 
             if (isAnyDataInXmlFile)
             {
-                if (dataValidation.CheckIfCourseAlreadyExists(course))
+                if (courseDataValidation.CheckIfCourseAlreadyExists(course))
                 {
                     MessageBox.Show("The Course with current Code already exists, please choose another Code.");
                 }
@@ -190,6 +198,19 @@ namespace TripCourseReservation
                 courseCRUD.CreateCourse(course);
                 this.Close();
             }
+        }
+
+        private bool? IsTransportIncluded()
+        {
+            bool? isChecked;
+            if (Tr_Inc_Yes.IsEnabled == true)
+            {
+                isChecked = Tr_Inc_Yes.IsChecked == true ? true : false;
+            }
+            else
+                isChecked = null;
+
+            return isChecked;
         }
 
         private bool IsFieldsAreDirty()
@@ -214,7 +235,7 @@ namespace TripCourseReservation
             return true;
         }
 
-    private void SaveButtonAbility()
+        private void SaveButtonAbility()
         {
             Save.IsEnabled = terms.Count > 0 ? true : false;
         }

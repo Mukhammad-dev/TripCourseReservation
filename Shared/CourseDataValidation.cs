@@ -8,7 +8,8 @@ using TripCourseReservation.Entities;
 
 namespace TripCourseReservation.Shared
 {
-    public class DataValidation
+    public class CourseDataValidation
+
     {
         #region Properties
         Course _course = new Course();
@@ -51,6 +52,7 @@ namespace TripCourseReservation.Shared
 
         public bool ValidateCourseBasicData(string title, string description, string trainer, string code, ref StringBuilder errorMessage)
         {
+            errorMessage.Clear();
             bool courseHasProblem = false;
             if (title == "" || description == "" || trainer == "" || code == "")
             {
@@ -84,7 +86,7 @@ namespace TripCourseReservation.Shared
             return noTerm;
         }
 
-        public bool ValidateTermFieldData(DateTime? dateFrom, DateTime? dateTo, string Price, string Capacity, ref StringBuilder errorMessage)
+        public bool ValidateTermFieldData(DateTime? dateFrom, DateTime? dateTo, string Price, string Capacity, string PickUpPlace, bool? trIncluded, ref StringBuilder errorMessage)
         {
             errorMessage.Clear();
             bool termHasProblem = false;
@@ -114,6 +116,12 @@ namespace TripCourseReservation.Shared
                     errorMessage.AppendLine(" - Capacity field can contain only integer type");
                     termHasProblem = true;
                 }
+            }
+
+            if(trIncluded == true && PickUpPlace == "")
+            {
+                errorMessage.AppendLine(" - As transport payment included, fill the Pickup place too");
+                termHasProblem = true;
             }
 
             return termHasProblem;

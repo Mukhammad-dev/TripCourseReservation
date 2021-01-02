@@ -35,8 +35,7 @@ namespace TripCourseReservation
             var courses = new List<Course>();
             courses.Add(course);
             //courseList.Courses.Add(course);
-            XmlSerializer xsCourse = new XmlSerializer(typeof(List<Course>));
-            //XmlSerializer xsTrip = new XmlSerializer(typeof(Trip));
+            XmlSerializer xsCourse = new XmlSerializer(typeof(List<Course>), new XmlRootAttribute("Courses"));
 
             TextWriter txtWritter = new StreamWriter(@coursesDataRepoPath);
 
@@ -57,7 +56,7 @@ namespace TripCourseReservation
         public List<Course> ReadCoursesData()
         {
             List<Course> coursesData = new List<Course>();
-            XmlSerializer formatter = new XmlSerializer(typeof(List<Course>));
+            XmlSerializer formatter = new XmlSerializer(typeof(List<Course>), new XmlRootAttribute("Courses"));
             using (FileStream fs = new FileStream(coursesDataRepoPath, FileMode.OpenOrCreate))
             {
                 try
@@ -76,7 +75,7 @@ namespace TripCourseReservation
         public void AddCourse(Course course)
         {
             xDoc.Load(coursesDataRepoPath);
-            var rootNode = xDoc.GetElementsByTagName("ArrayOfCourse")[0];
+            var rootNode = xDoc.GetElementsByTagName("Courses")[0];
             var nav = rootNode.CreateNavigator();
             var emptyNamepsaces = new XmlSerializerNamespaces(new[] {
             XmlQualifiedName.Empty
@@ -133,7 +132,13 @@ namespace TripCourseReservation
         public void UpdateCourseData(Course course)
         {
             XDocument xdoc = XDocument.Load(coursesDataRepoPath);
-            XElement root = xdoc.Element("ArrayOfCourse");
+            XElement root = xdoc.Element("Courses");
+
+            var foundCourse = root.Elements("Course").FirstOrDefault(a => a.Element("Code").Value == course.Code);
+
+            XmlSerializer courseSerializer = new XmlSerializer(typeof(Course));
+
+            //courseSerializer.Serialize()
 
             foreach (XElement xe in root.Elements("Course").ToList())
             {
@@ -171,7 +176,7 @@ namespace TripCourseReservation
         public void RemoveCourse(Course course)
         {
             XDocument xdoc = XDocument.Load(coursesDataRepoPath);
-            XElement root = xdoc.Element("ArrayOfCourse");
+            XElement root = xdoc.Element("Courses");
 
             foreach (XElement xe in root.Elements("Course").ToList())
             {
@@ -279,7 +284,7 @@ namespace TripCourseReservation
             xdoc.Save(tripsDataRepoPath);
         }
 
-        public void RemoveData(Trip trip)
+        public void RemoveTrip(Trip trip)
         {
             XDocument xdoc = XDocument.Load(tripsDataRepoPath);
             XElement root = xdoc.Element("ArrayOfTrip");
@@ -292,11 +297,6 @@ namespace TripCourseReservation
                 }
             }
             xdoc.Save(tripsDataRepoPath);
-        }
-
-        public void RemoveTrip(Trip trip)
-        {
-            throw new NotImplementedException();
         }
         #endregion
     }

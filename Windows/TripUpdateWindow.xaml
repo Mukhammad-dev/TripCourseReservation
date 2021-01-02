@@ -25,7 +25,6 @@
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Transport" VerticalAlignment="Top" Margin="10,213,0,0" FontSize="14"/>
         <RadioButton GroupName="TR" x:Name="Tr_Yes" Content="Yes" Click="Tr_Yes_Click" HorizontalAlignment="Left" Margin="100,217,0,0" VerticalAlignment="Top" Width="50"/>
         <RadioButton GroupName="TR" x:Name="Tr_No" Content="No" Checked="Tr_No_Checked" HorizontalAlignment="Left" Margin="149,217,0,0" VerticalAlignment="Top" Width="50" />
-
         <!--terms-->
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,242,0,0" FontSize="14" Width="47"><Run FontWeight="Bold" Text="Term"/><Run FontWeight="Bold" Text="s"/></TextBlock>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,266,0,0" FontSize="14" Width="76" Text="Date from"/>
@@ -54,10 +53,8 @@
         <!--terms list-->
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="9,513,0,0" FontSize="14" Width="150" Text="Terms of current tpi["/>
         <ListBox x:Name="Terms" DisplayMemberPath="Event" SelectionChanged="onTermsSelectionChanged" HorizontalAlignment="Left" Height="122" VerticalAlignment="Top" Width="318" Margin="9,537,0,0"/>
-
         <!--save a cancel buttons-->
-        <Button Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="252,673,0,0" Height="30" Click="onSaveChanges"/>
-        <Button Content="Save Changes" HorizontalAlignment="Left" VerticalAlignment="Top" Width="85" Margin="162,673,0,0" Height="30" Click="onCancel"/>
-
+        <Button Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="252,673,0,0" Height="30" Click="onCancel"/>
+        <Button Content="Save Changes" HorizontalAlignment="Left" VerticalAlignment="Top" Width="85" Margin="162,673,0,0" Height="30" Click="onSaveChanges"/>
     </Grid>
 </Window>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Courses xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Course>
+    <Title>ghghgh</Title>
+    <Code>hghgh</Code>
+    <Description>ghghgh</Description>
+    <CanContainTransport>false</CanContainTransport>
+    <Trainer>ghghgg</Trainer>
+    <Terms>
+      <Term>
+        <Event>ghghgh : 10.12.2020 - 12.12.2020</Event>
+        <DateFrom>2020-12-10T00:00:00</DateFrom>
+        <DateTo>2020-12-12T00:00:00</DateTo>
+        <Price>5454</Price>
+        <Capacity>4545</Capacity>
+      </Term>
+    </Terms>
+  </Course>
+</Courses>

@@ -17,7 +17,7 @@
         <TextBox x:Name="Code" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" VerticalAlignment="Top" Width="227" Margin="101,51,0,0"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="11,86,0,0" FontSize="14"><Run Text="Title"/><Run Text="*"/></TextBlock>
         <TextBox x:Name="Title" Text="{Binding Title, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource errorTemplate}" 
-                 HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" VerticalAlignment="Top" Width="227" Margin="101,88,0,0" TextChanged="TextBox_TextChanged"/>
+                 HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" VerticalAlignment="Top" Width="227" Margin="101,88,0,0"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="11,127,0,0" FontSize="14" Text="Subtitle"/>
         <TextBox x:Name="Subtitle" Text="{Binding Subtitle, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" Validation.ErrorTemplate="{StaticResource errorTemplate}" 
                  HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" VerticalAlignment="Top" Width="227" Margin="101,127,0,0"/>
@@ -55,8 +55,8 @@ HorizontalAlignment="Left" Margin="100,451,0,0" VerticalAlignment="Top" Width="5
         <ListBox x:Name="Terms" DisplayMemberPath="Event" HorizontalAlignment="Left" Height="122" VerticalAlignment="Top" Width="318" Margin="9,561,0,0"/>
 
         <!--save a cancel buttons-->
-        <Button x:Name="Save" Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="252,693,0,0" Height="30" Click="onSave"/>
-        <Button Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Margin="164,693,0,0" Height="30" Click="onCancel"/>
+        <Button  Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="252,693,0,0" Height="30" Click="onCancel"/>
+        <Button x:Name="Save" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="76" Margin="164,693,0,0" Height="30" Click="onSave"/>
     </Grid>
 
 </Window>

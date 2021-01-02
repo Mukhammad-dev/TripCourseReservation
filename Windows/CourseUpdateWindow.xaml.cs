@@ -27,7 +27,7 @@ namespace TripCourseReservation
         public Course course { get; set; }
         List<Term> listOfTerms = new List<Term>();
         ICourseCRUD courseCRUD = new XmlCRUD();
-        DataValidation dataValidation = new DataValidation();
+        CourseDataValidation courseDataValidation = new CourseDataValidation();
         StringBuilder errorMessage = new StringBuilder();
 
         bool termIsUpdated = false;
@@ -49,7 +49,7 @@ namespace TripCourseReservation
             Tr_Inc_No.IsChecked = true;
             if(Tr_Yes.IsChecked == true)
             {
-                if ( dataValidation.ValidateTermData(GetAllTermsListBoxItems(), Tr_Yes.IsChecked == true, ref errorMessage))
+                if ( courseDataValidation.ValidateTermData(GetAllTermsListBoxItems(), Tr_Yes.IsChecked == true, ref errorMessage))
                 {
                     MessageBox.Show(errorMessage.ToString());
                 }
@@ -142,7 +142,7 @@ namespace TripCourseReservation
             }
             else
             {
-                if (dataValidation.CheckIfCourseIsUpdatable(listOfTerms, DateFrom.SelectedDate, DateTo.SelectedDate, IsTransportIncluded()))
+                if (courseDataValidation.CheckIfCourseIsUpdatable(listOfTerms, DateFrom.SelectedDate, DateTo.SelectedDate, IsTransportIncluded()))
                 {
                     listOfTerms.Remove(term);
                     listOfTerms.Add(GenerateTerm());
@@ -162,7 +162,7 @@ namespace TripCourseReservation
             {
                 MessageBox.Show(errorMessage.ToString());
             }
-            else if (dataValidation.CheckIfCourseIsUpdatable(listOfTerms, DateFrom.SelectedDate, DateTo.SelectedDate, IsTransportIncluded()))
+            else if (courseDataValidation.CheckIfCourseIsUpdatable(listOfTerms, DateFrom.SelectedDate, DateTo.SelectedDate, IsTransportIncluded()))
             {
                 listOfTerms.Add(GenerateTerm());
                 Terms.ItemsSource = null;
@@ -213,8 +213,8 @@ namespace TripCourseReservation
 
         private void onSaveChanges(object sender, RoutedEventArgs e)
         {
-            if (dataValidation.ValidateCourseBasicDataToUpdate(Title.Text, Description.Text, Trainer.Text, ref errorMessage)
-                || dataValidation.CheckIfTermExists(listOfTerms, ref errorMessage))
+            if (courseDataValidation.ValidateCourseBasicDataToUpdate(Title.Text, Description.Text, Trainer.Text, ref errorMessage)
+                || courseDataValidation.CheckIfTermExists(listOfTerms, ref errorMessage))
             {
                 MessageBox.Show(errorMessage.ToString());
             }
@@ -226,7 +226,7 @@ namespace TripCourseReservation
                 switch (result)
                 {
                     case MessageBoxResult.Yes:
-                        if (dataValidation.ValidateTermData(GetAllTermsListBoxItems(), Tr_Yes.IsChecked == true, ref errorMessage))
+                        if (courseDataValidation.ValidateTermData(GetAllTermsListBoxItems(), Tr_Yes.IsChecked == true, ref errorMessage))
                         {
                             MessageBox.Show(errorMessage.ToString());
                         }else
@@ -238,7 +238,7 @@ namespace TripCourseReservation
             }
             else
             {
-                if (dataValidation.ValidateTermData(GetAllTermsListBoxItems(), Tr_Yes.IsChecked == true, ref errorMessage))
+                if (courseDataValidation.ValidateTermData(GetAllTermsListBoxItems(), Tr_Yes.IsChecked == true, ref errorMessage))
                 {
                     MessageBox.Show(errorMessage.ToString());
                 }
@@ -263,6 +263,8 @@ namespace TripCourseReservation
                         break;
                 }
             }
+
+            this.Close();
         }
 
         #endregion
@@ -291,7 +293,7 @@ namespace TripCourseReservation
 
         private bool ValidateTermFieldData()
         {
-            return dataValidation.ValidateTermFieldData(DateFrom.SelectedDate, DateTo.SelectedDate, Price.Text, Capacity.Text, ref errorMessage);
+            return courseDataValidation.ValidateTermFieldData(DateFrom.SelectedDate, DateTo.SelectedDate, Price.Text, Capacity.Text, PickUpPlace.Text, IsTransportIncluded(), ref errorMessage);
         }
 
         private bool? IsTransportIncluded()

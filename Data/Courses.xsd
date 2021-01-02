@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xsd:element name="Courses">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Course">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="Title" type="xsd:string" />
+              <xsd:element name="Code" type="xsd:string" />
+              <xsd:element name="Description" type="xsd:string" />
+              <xsd:element name="CanContainTransport" type="xsd:boolean" />
+              <xsd:element name="Trainer" type="xsd:string" />
+              <xsd:element name="Terms">
+                <xsd:complexType>
+                  <xsd:sequence>
+                    <xsd:element name="Term">
+                      <xsd:complexType>
+                        <xsd:sequence>
+                          <xsd:element name="Event" type="xsd:string" />
+                          <xsd:element name="DateFrom" type="xsd:dateTime" />
+                          <xsd:element name="DateTo" type="xsd:dateTime" />
+                          <xsd:element name="Price" type="xsd:unsignedShort" />
+                          <xsd:element name="Capacity" type="xsd:unsignedShort" />
+                          <xsd:element name="TransportIncluded" type="xsd:boolean" minOccurs="0" />
+                          <xsd:assert test="not(CanContainTransport = 'true') or IBAN"/>
+                          <xsd:element name="PickUpPlace" type="xsd:string" />
+                        </xsd:sequence>
+                      </xsd:complexType>
+                    </xsd:element>
+                  </xsd:sequence>
+                </xsd:complexType>
+              </xsd:element>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xs:schema>
