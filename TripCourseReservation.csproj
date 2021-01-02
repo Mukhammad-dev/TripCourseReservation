@@ -161,12 +161,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CourseTermsWindow.xaml.cs">
+      <DependentUpon>CourseTermsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CreateCourseWindow.xaml.cs">
+      <DependentUpon>CreateCourseWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CreateTripWindow.xaml.cs">
+      <DependentUpon>CreateTripWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindowAnother.xaml.cs">
       <DependentUpon>MainWindowAnother.xaml</DependentUpon>
     </Compile>
     <Compile Include="Shared\CoursesXSDValidation.cs" />
     <Compile Include="Shared\TripDataValidation.cs" />
     <Compile Include="Shared\ObservableObject.cs" />
+    <Compile Include="UpdateCourseWindow.xaml.cs">
+      <DependentUpon>UpdateCourseWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateTripWindow.xaml.cs">
+      <DependentUpon>UpdateTripWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View Models\TripVM.cs" />
     <Compile Include="View Models\CourseVM.cs" />
     <Compile Include="View Models\MainWindowsVM.cs" />
@@ -192,7 +207,27 @@
       <DependentUpon>TripUpdateWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="XmlXsdResolver.cs" />
+    <Page Include="CourseTermsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CreateCourseWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CreateTripWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindowAnother.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdateCourseWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdateTripWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

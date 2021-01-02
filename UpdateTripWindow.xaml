@@ -1,0 +1,38 @@
+﻿<Window x:Class="TripCourseReservation.UpdateTripWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TripCourseReservation"
+        mc:Ignorable="d"
+        Title="UpdateTripWindow" Height="438.679" Width="405.66">
+    <Grid>
+        <!--update window-->
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold" FontSize="24" TextDecorations="Underline"><Run Text="Trip "/><Run Text="Detail"/></TextBlock>
+        <!--formular pro zazitky-->
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Code*" VerticalAlignment="Top" Margin="10,55,0,0" FontSize="14"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="164" Margin="10,79,0,0"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,115,0,0" FontSize="14"><Run Text="Title"/><Run Text="*"/></TextBlock>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="164" Margin="10,139,0,0"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,175,0,0" FontSize="14" Text="Subtitle"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="164" Margin="10,199,0,0"/>
+
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,233,0,0" FontSize="14" Text="Description*"/>
+        <TextBox HorizontalAlignment="Left" Height="71" TextWrapping="Wrap" VerticalAlignment="Top" Width="164" Margin="10,257,0,0"/>
+        <!--checkboxy pro transport-->
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,344,0,0" FontSize="14" Text="Transport"/>
+        <RadioButton Content="included" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,365,0,0"/>
+        <RadioButton Content="not included" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="88,365,0,0"/>
+        <!--form fields for terms-->
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="205,55,0,0" FontSize="14"><Run FontWeight="Bold" Text="Terms"/></TextBlock>
+        <ListBox HorizontalAlignment="Left" Height="166" VerticalAlignment="Top" Width="175" Margin="205,79,0,0"/>
+        <Button Content="Add Term" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="305,255,0,0"/>
+        <Button Content="Update Term" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="205,255,0,0" Click="Button_Click"/>
+        <Button Content="Remove Term" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="205,280,0,0"/>
+
+        <!--buttons-->
+        <Button Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Margin="205,362,0,0"/>
+        <Button Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Margin="300,362,0,0"/>
+
+    </Grid>
+</Window>
