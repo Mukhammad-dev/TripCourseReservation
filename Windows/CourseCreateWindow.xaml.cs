@@ -189,13 +189,13 @@ namespace TripCourseReservation
                 }
                 else
                 {
-                    courseCRUD.AddCourse(course);
+                    courseCRUD.SaveCourse(course);
                     this.Close();
                 }
             }
             else
             {
-                courseCRUD.CreateCourse(course);
+                courseCRUD.SaveCourse(course);
                 this.Close();
             }
         }

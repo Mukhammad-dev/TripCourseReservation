@@ -13,6 +13,7 @@ using System.Xml.Linq;
 using System.Xml.Serialization;
 using TripCourseReservation.CRUD;
 using TripCourseReservation.Entities;
+using TripCourseReservation.Shared;
 
 namespace TripCourseReservation
 {
@@ -25,8 +26,52 @@ namespace TripCourseReservation
         private static readonly string tripsDataRepoPath = connectionString_2.Substring(connectionString_2.IndexOf('=') + 1);
 
         private XmlDocument xDoc = new XmlDocument();
+        private static readonly XDocument coursesXDocument;
+
+        static XmlCRUD()
+        {
+            if (!File.Exists(coursesDataRepoPath))
+            {
+                using(var tw = new StreamWriter(@coursesDataRepoPath))
+                {
+                    XmlSerializer xsCourse = new XmlSerializer(typeof(List<Course>), new XmlRootAttribute("Courses"));
+                    xsCourse.Serialize(tw, new List<Course>());
+                }
+            }
+            coursesXDocument = XDocument.Load(coursesDataRepoPath);
+        }
+
+
 
         #region Course CRUD methods
+
+        public void SaveCourse(Course course)
+        {
+            var courseXElement = coursesXDocument
+                                    .Element("Courses")
+                                    .Elements("Course")
+                                    .FirstOrDefault(a => a.Element("Code").Value == course.Code);
+            
+            if(courseXElement != null)
+                UpdateCourse(course, courseXElement);
+            else
+                InsertCourse(course);
+        }
+
+        private void InsertCourse(Course course)
+        {
+            var courseXElement = course.ToXElement<Course>();
+
+            coursesXDocument.Root.Add(courseXElement);
+            coursesXDocument.Save(coursesDataRepoPath);
+        }
+
+        private void UpdateCourse(Course course, XElement courseXElement)
+        {
+            courseXElement.ReplaceWith(course.ToXElement<Course>()); 
+
+            coursesXDocument.Save(coursesDataRepoPath);
+        }
 
         public void CreateCourse(Course course)
         {
@@ -34,13 +79,9 @@ namespace TripCourseReservation
             
             var courses = new List<Course>();
             courses.Add(course);
-            //courseList.Courses.Add(course);
             XmlSerializer xsCourse = new XmlSerializer(typeof(List<Course>), new XmlRootAttribute("Courses"));
-
             TextWriter txtWritter = new StreamWriter(@coursesDataRepoPath);
-
             xsCourse.Serialize(txtWritter, courses);
-            //xsTrip.Serialize(txtWritter, trip);
 
             txtWritter.Close();
 
@@ -91,43 +132,7 @@ namespace TripCourseReservation
             xDoc.Save(@coursesDataRepoPath);
         }
 
-        //public void CreateCourse(Course course)
-        //{
-        //    StringBuilder sb = new StringBuilder();
-        //    sb.Append("<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
-        //                "<ArrayOfCourse><Course>" +
-        //                "<Title>" + course.Title + "</Title>" +
-        //                "<Code>" + course.Code + "</Code>" +
-        //                "<Description>" + course.Description + "</Description>" +
-        //                "<CanContainTransport>" + course.CanContainTransport.ToString().ToLower() + "</CanContainTransport>" +
-        //                "<Trainer>" + course.Trainer + "</Trainer>");
-        //    foreach (Term term in course.Terms)
-        //    {
-        //        sb.Append("<Terms>" +
-        //                      "<Term>" +
-        //                          "<Event>" + term.Event + "</Event>" +
-        //                          "<DateFrom>" + term.DateFrom + "</DateFrom>" +
-        //                          "<DateTo>" + term.DateTo + "</DateTo>" +
-        //                          "<Price>" + term.Price.ToString() + "</Price>" +
-        //                          "<Capacity>" + term.Capacity.ToString() + "</Capacity>");
-        //        if (course.CanContainTransport)
-        //        {
-        //            sb.Append("<TransportIncluded>" + term.TransportIncluded.ToString().ToLower() + "</TransportIncluded>");
-        //            if (term.TransportIncluded)
-        //                sb.Append("<PickUpPlace>" + term.PickUpPlace + "</PickUpPlace>");
-        //        }
-        //        sb.Append("</Term>" +
-        //               "</Terms>");
-        //    }
-        //    sb.Append("</Course></ArrayOfCourse>");
-
-        //    //Create the XmlDocument.  
-        //    XmlDocument doc = new XmlDocument();
-        //    //doc.LoadXml((sb.ToString()));
-        //    doc.LoadXml((Convert.ToString(sb)));
-        //    //Save the document to a file.  
-        //    doc.Save(dataRepoPathes[0]);
-        //}
+      
 
         public void UpdateCourseData(Course course)
         {

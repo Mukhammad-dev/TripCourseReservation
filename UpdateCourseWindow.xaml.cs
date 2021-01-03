@@ -23,5 +23,10 @@ namespace TripCourseReservation
         {
             InitializeComponent();
         }
+
+        private void onUpdateTerm(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

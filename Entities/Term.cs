@@ -16,5 +16,10 @@ namespace TripCourseReservation.Entities
         public int Capacity{ get; set; }
         public bool? TransportIncluded { get; set; }
         public string PickUpPlace { get; set; }
+
+        public bool ShouldSerializeTransportIncluded()
+        {
+            return TransportIncluded.HasValue;
+        }
     }
 }

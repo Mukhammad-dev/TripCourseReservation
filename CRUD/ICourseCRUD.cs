@@ -9,6 +9,7 @@ namespace TripCourseReservation.CRUD
 {
     public interface ICourseCRUD
     {
+        void SaveCourse(Course course);
         void CreateCourse(Course course);
         List<Course> ReadCoursesData();
         void AddCourse(Course course);

@@ -376,7 +376,7 @@ namespace TripCourseReservation
             course.CanContainTransport = Tr_Yes.IsChecked == true ? true : false;
             course.Trainer = Trainer.Text;
             course.Terms = listOfTerms;
-            courseCRUD.UpdateCourseData(course);
+            courseCRUD.SaveCourse(course);
 
             this.Close();
         }
