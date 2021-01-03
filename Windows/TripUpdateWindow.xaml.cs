@@ -132,7 +132,6 @@ namespace TripCourseReservation
             Term term = (Term)Terms.SelectedItem;
             if (ValidateTermFieldData())
             {
-                errorMessage.Clear();
                 MessageBox.Show(errorMessage.ToString());
             }
             else if (TermUnchanged(term))
@@ -263,6 +262,7 @@ namespace TripCourseReservation
                         break;
                 }
             }
+            this.Close();
         }
 
         #endregion
@@ -271,8 +271,6 @@ namespace TripCourseReservation
 
         public void InitializeTripData()
         {
-            //Tr_No.IsChecked = true;
-
             Title.Text = trip.Title;
             Description.Text = trip.Description;
             if (trip.CanContainTransport)
@@ -291,7 +289,7 @@ namespace TripCourseReservation
 
         private bool ValidateTermFieldData()
         {
-            return tripDataValidation.ValidateTermFieldData(DateFrom.SelectedDate, DateTo.SelectedDate, Price.Text, Capacity.Text, ref errorMessage);
+            return tripDataValidation.ValidateTermFieldData(DateFrom.SelectedDate, DateTo.SelectedDate, Price.Text, Capacity.Text, PickUpPlace.Text, IsTransportIncluded(), ref errorMessage);
         }
 
         private bool? IsTransportIncluded()
@@ -356,7 +354,6 @@ namespace TripCourseReservation
 
         private void ClearTerm()
         {
-            Tr_No.IsChecked = true;
             DateFrom.SelectedDate = null;
             DateTo.SelectedDate = null;
             Price.Text = "0";

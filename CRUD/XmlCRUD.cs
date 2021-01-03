@@ -26,17 +26,11 @@ namespace TripCourseReservation
         public void CreateCourse(Course course)
         {
             //TO DO: use "using" statement
-            
             var courses = new List<Course>();
             courses.Add(course);
-            //courseList.Courses.Add(course);
             XmlSerializer xsCourse = new XmlSerializer(typeof(List<Course>), new XmlRootAttribute("Courses"));
-
             TextWriter txtWritter = new StreamWriter(@coursesDataRepoPath);
-
             xsCourse.Serialize(txtWritter, courses);
-            //xsTrip.Serialize(txtWritter, trip);
-
             txtWritter.Close();
 
             XNamespace i = "http://www.w3.org/2001/XMLSchema-instance";
@@ -139,9 +133,7 @@ namespace TripCourseReservation
 
             xdoc.Save(coursesDataRepoPath);
         }
-
         #endregion
-
 
         #region Trip CRUD methods
         public void CreateTrip(Trip trip)

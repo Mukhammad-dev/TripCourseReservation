@@ -122,7 +122,7 @@ namespace TripCourseReservation
 
         private bool ValidateTermFieldData()
         {
-            return tripDataValidation.ValidateTermFieldData(DateFrom.SelectedDate, DateTo.SelectedDate, Price.Text, Capacity.Text, ref errorMessage);
+            return tripDataValidation.ValidateTermFieldData(DateFrom.SelectedDate, DateTo.SelectedDate, Price.Text, Capacity.Text, PickUpPlace.Text, IsTransportIncluded(), ref errorMessage);
         }
 
         private List<Term> AddTerm()
@@ -213,6 +213,19 @@ namespace TripCourseReservation
 
             this.Close();
             return true;
+        }
+
+        private bool? IsTransportIncluded()
+        {
+            bool? isChecked;
+            if (Tr_Inc_Yes.IsEnabled == true)
+            {
+                isChecked = Tr_Inc_Yes.IsChecked == true ? true : false;
+            }
+            else
+                isChecked = null;
+
+            return isChecked;
         }
 
         private void SaveButtonAbility()

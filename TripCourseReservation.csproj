@@ -161,10 +161,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="MainWindowAnother.xaml.cs">
-      <DependentUpon>MainWindowAnother.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Shared\CoursesXSDValidation.cs" />
+    <Compile Include="Shared\XSDValidation.cs" />
     <Compile Include="Shared\TripsXSDValidation.cs" />
     <Compile Include="Shared\TripDataValidation.cs" />
     <Compile Include="Shared\ObservableObject.cs" />
@@ -192,11 +189,6 @@
     <Compile Include="Windows\TripUpdateWindow.xaml.cs">
       <DependentUpon>TripUpdateWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="XmlXsdResolver.cs" />
-    <Page Include="MainWindowAnother.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Windows\CourseCreateWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -244,15 +236,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Data\Course.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Data\Courses.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Data\Trips.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

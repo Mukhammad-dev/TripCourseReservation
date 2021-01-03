@@ -38,8 +38,9 @@ namespace TripCourseReservation
         private static readonly string tripsDataRepoPath = connectionString_2.Substring(connectionString_2.IndexOf('=') + 1);
         private readonly string[] pathes = new string[] { coursesDataRepoPath, tripsDataRepoPath };
 
-        TripsXSDValidation TripsXSDValidation = new TripsXSDValidation();
-        XSDValidation XSDValidation = new XSDValidation();
+        private static readonly string path = new Uri(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+
+        XSDValidation xSDValidation = new XSDValidation(path);
         #endregion
 
         #region Constructor
@@ -228,28 +229,26 @@ namespace TripCourseReservation
 
             if (result == true)
             {
-                var path = new Uri(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
-                XmlSchemaSet schema = new XmlSchemaSet();
-                schema.Add("", path + "\\" + XSDValidation.GetCourseXSDpath());
                 XmlReader rd = XmlReader.Create(openFileDlg.FileName);
                 XDocument doc = XDocument.Load(rd);
-                doc.Validate(schema, ValidationEventHandler);
-
-                var dir = Path.GetDirectoryName(coursesDataRepoPath);
-                if (!Directory.Exists(dir))
+                if (xSDValidation.ValidateCourse(doc))
                 {
-                    Directory.CreateDirectory(dir);
+                    var dir = Path.GetDirectoryName(coursesDataRepoPath);
+                    if (!Directory.Exists(dir))
+                    {
+                        Directory.CreateDirectory(dir);
+                    }
+                    if (File.Exists(coursesDataRepoPath))
+                    {
+                        File.Delete(coursesDataRepoPath);
+                        File.Copy(openFileDlg.FileName, coursesDataRepoPath);
+                    }
+                    else
+                    {
+                        File.Copy(openFileDlg.FileName, coursesDataRepoPath);
+                    }
+                    InitializeCourseData();
                 }
-                if (File.Exists(coursesDataRepoPath))
-                {
-                    File.Delete(coursesDataRepoPath);
-                    File.Copy(openFileDlg.FileName, coursesDataRepoPath);
-                }
-                else
-                {
-                    File.Copy(openFileDlg.FileName, coursesDataRepoPath);
-                }
-                InitializeCourseData();
             }
         }
 
@@ -265,44 +264,27 @@ namespace TripCourseReservation
 
             if (result == true)
             {
-                var path = new Uri(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
-                XmlSchemaSet schema = new XmlSchemaSet();
-                schema.Add("", path + "\\" + TripsXSDValidation.GetTripXSDpath());
                 XmlReader rd = XmlReader.Create(openFileDlg.FileName);
                 XDocument doc = XDocument.Load(rd);
-                doc.Validate(schema, ValidationEventHandler);
 
-                var dir = Path.GetDirectoryName(tripsDataRepoPath);
-                if (!Directory.Exists(dir))
+                if (xSDValidation.ValidateTrip(doc))
                 {
-                    Directory.CreateDirectory(dir);
+                    var dir = Path.GetDirectoryName(tripsDataRepoPath);
+                    if (!Directory.Exists(dir))
+                    {
+                        Directory.CreateDirectory(dir);
+                    }
+                    if (File.Exists(tripsDataRepoPath))
+                    {
+                        File.Delete(tripsDataRepoPath);
+                        File.Copy(openFileDlg.FileName, tripsDataRepoPath);
+                    }
+                    else
+                    {
+                        File.Copy(openFileDlg.FileName, tripsDataRepoPath);
+                    }
+                    InitializeTripData();
                 }
-                if (File.Exists(tripsDataRepoPath))
-                {
-                    File.Delete(tripsDataRepoPath);
-                    File.Copy(openFileDlg.FileName, tripsDataRepoPath);
-                }
-                else
-                {
-                    File.Copy(openFileDlg.FileName, tripsDataRepoPath);
-                }
-                InitializeTripData();
-            }
-        }
-
-        static void ValidationEventHandler(object sender, ValidationEventArgs e)
-        {
-            XmlSeverityType type = XmlSeverityType.Warning;
-            if (Enum.TryParse<XmlSeverityType>("Error", out type))
-            {
-                try
-                {
-                    if (type == XmlSeverityType.Error) throw new Exception(e.Message);
-                }
-                catch(Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }                
             }
         }
     }

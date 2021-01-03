@@ -83,7 +83,7 @@ namespace TripCourseReservation.Shared
             return noTerm;
         }
 
-        public bool ValidateTermFieldData(DateTime? dateFrom, DateTime? dateTo, string Price, string Capacity, ref StringBuilder errorMessage)
+        public bool ValidateTermFieldData(DateTime? dateFrom, DateTime? dateTo, string Price, string Capacity, string PickUpPlace, bool? trIncluded, ref StringBuilder errorMessage)
         {
             errorMessage.Clear();
             bool termHasProblem = false;
@@ -113,6 +113,12 @@ namespace TripCourseReservation.Shared
                     errorMessage.AppendLine(" - Capacity field can contain only integer type");
                     termHasProblem = true;
                 }
+            }
+
+            if (trIncluded == true && PickUpPlace == "")
+            {
+                errorMessage.AppendLine(" - As transport payment included, fill the Pickup place too");
+                termHasProblem = true;
             }
 
             return termHasProblem;
