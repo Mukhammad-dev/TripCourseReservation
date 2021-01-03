@@ -15,7 +15,7 @@
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
                     <MenuItem Header="Import Course Data" Click="onImportCourseData" />
-                    <MenuItem Header="Import Course Data" Click="onImportTripData" />
+                    <MenuItem Header="Import Trip Data" Click="onImportTripData" />
                     <MenuItem Header="Save" />
                     <Separator />
                     <MenuItem Header="Exit" />

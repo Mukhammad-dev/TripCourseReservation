@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace TripCourseReservation.Shared
 {
-    public class CoursesXSDValidation
+    public class XSDValidation
     {
-        private readonly string XSDpath = Path.Combine("Data", "Courses.xsd");
+        private readonly string CourseXSDpath = Path.Combine("Data", "Courses.xsd");
 
-        public CoursesXSDValidation()
+        public XSDValidation()
         {
-           var a = File.OpenRead(XSDpath);
+           var a = File.OpenRead(CourseXSDpath);
         }
 
-        public string GetXSDpath()
+        public string GetCourseXSDpath()
         {
-            return XSDpath;
+            return CourseXSDpath;
         }
     }
 

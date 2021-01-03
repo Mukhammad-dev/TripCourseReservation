@@ -1,13 +1,8 @@
-﻿using DocumentFormat.OpenXml.Bibliography;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
@@ -91,54 +86,10 @@ namespace TripCourseReservation
             xDoc.Save(@coursesDataRepoPath);
         }
 
-        //public void CreateCourse(Course course)
-        //{
-        //    StringBuilder sb = new StringBuilder();
-        //    sb.Append("<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
-        //                "<ArrayOfCourse><Course>" +
-        //                "<Title>" + course.Title + "</Title>" +
-        //                "<Code>" + course.Code + "</Code>" +
-        //                "<Description>" + course.Description + "</Description>" +
-        //                "<CanContainTransport>" + course.CanContainTransport.ToString().ToLower() + "</CanContainTransport>" +
-        //                "<Trainer>" + course.Trainer + "</Trainer>");
-        //    foreach (Term term in course.Terms)
-        //    {
-        //        sb.Append("<Terms>" +
-        //                      "<Term>" +
-        //                          "<Event>" + term.Event + "</Event>" +
-        //                          "<DateFrom>" + term.DateFrom + "</DateFrom>" +
-        //                          "<DateTo>" + term.DateTo + "</DateTo>" +
-        //                          "<Price>" + term.Price.ToString() + "</Price>" +
-        //                          "<Capacity>" + term.Capacity.ToString() + "</Capacity>");
-        //        if (course.CanContainTransport)
-        //        {
-        //            sb.Append("<TransportIncluded>" + term.TransportIncluded.ToString().ToLower() + "</TransportIncluded>");
-        //            if (term.TransportIncluded)
-        //                sb.Append("<PickUpPlace>" + term.PickUpPlace + "</PickUpPlace>");
-        //        }
-        //        sb.Append("</Term>" +
-        //               "</Terms>");
-        //    }
-        //    sb.Append("</Course></ArrayOfCourse>");
-
-        //    //Create the XmlDocument.  
-        //    XmlDocument doc = new XmlDocument();
-        //    //doc.LoadXml((sb.ToString()));
-        //    doc.LoadXml((Convert.ToString(sb)));
-        //    //Save the document to a file.  
-        //    doc.Save(dataRepoPathes[0]);
-        //}
-
         public void UpdateCourseData(Course course)
         {
             XDocument xdoc = XDocument.Load(coursesDataRepoPath);
             XElement root = xdoc.Element("Courses");
-
-            var foundCourse = root.Elements("Course").FirstOrDefault(a => a.Element("Code").Value == course.Code);
-
-            XmlSerializer courseSerializer = new XmlSerializer(typeof(Course));
-
-            //courseSerializer.Serialize()
 
             foreach (XElement xe in root.Elements("Course").ToList())
             {
@@ -197,7 +148,7 @@ namespace TripCourseReservation
         {
             var trips = new List<Trip>();
             trips.Add(trip);
-            XmlSerializer xsTrip = new XmlSerializer(typeof(List<Trip>));
+            XmlSerializer xsTrip = new XmlSerializer(typeof(List<Trip>), new XmlRootAttribute("Trips"));
             TextWriter txtWritter = new StreamWriter(@tripsDataRepoPath);
             xsTrip.Serialize(txtWritter, trips);
             txtWritter.Close();
@@ -213,7 +164,7 @@ namespace TripCourseReservation
         public List<Trip> ReadTripsData()
         {
             List<Trip> tripsData = new List<Trip>();
-            XmlSerializer formatter = new XmlSerializer(typeof(List<Trip>));
+            XmlSerializer formatter = new XmlSerializer(typeof(List<Trip>), new XmlRootAttribute("Trips"));
             using (FileStream fs = new FileStream(tripsDataRepoPath, FileMode.OpenOrCreate))
             {
                 try
@@ -231,7 +182,7 @@ namespace TripCourseReservation
         public void AddTrip(Trip trip)
         {
             xDoc.Load(tripsDataRepoPath);
-            var rootNode = xDoc.GetElementsByTagName("ArrayOfTrip")[0];
+            var rootNode = xDoc.GetElementsByTagName("Trips")[0];
             var nav = rootNode.CreateNavigator();
             var emptyNamepsaces = new XmlSerializerNamespaces(new[] {
             XmlQualifiedName.Empty
@@ -250,7 +201,7 @@ namespace TripCourseReservation
         public void UpdateTripData(Trip trip)
         {
             XDocument xdoc = XDocument.Load(tripsDataRepoPath);
-            XElement root = xdoc.Element("ArrayOfTrip");
+            XElement root = xdoc.Element("Trips");
 
             foreach (XElement xe in root.Elements("Trip").ToList())
             {
@@ -287,7 +238,7 @@ namespace TripCourseReservation
         public void RemoveTrip(Trip trip)
         {
             XDocument xdoc = XDocument.Load(tripsDataRepoPath);
-            XElement root = xdoc.Element("ArrayOfTrip");
+            XElement root = xdoc.Element("Trips");
 
             foreach (XElement xe in root.Elements("Trip").ToList())
             {

@@ -165,6 +165,7 @@
       <DependentUpon>MainWindowAnother.xaml</DependentUpon>
     </Compile>
     <Compile Include="Shared\CoursesXSDValidation.cs" />
+    <Compile Include="Shared\TripsXSDValidation.cs" />
     <Compile Include="Shared\TripDataValidation.cs" />
     <Compile Include="Shared\ObservableObject.cs" />
     <Compile Include="View Models\TripVM.cs" />
@@ -250,6 +251,9 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Data\Trips.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -259,9 +263,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Data\XMLFile1.xml" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Data\Courses.xml" />

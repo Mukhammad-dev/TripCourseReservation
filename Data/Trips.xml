@@ -1,2 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ArrayOfTrip xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+<Trips xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Trip>
+    <Title>One</Title>
+    <Code>B1</Code>
+    <Description>First</Description>
+    <CanContainTransport>true</CanContainTransport>
+    <Subtitle>One A</Subtitle>
+    <Terms>
+      <Term>
+        <Event>One : 01.1.2021 - 08.1.2021</Event>
+        <DateFrom>2021-01-01T00:00:00</DateFrom>
+        <DateTo>2021-01-08T00:00:00</DateTo>
+        <Price>56656</Price>
+        <Capacity>560</Capacity>
+        <TransportIncluded>true</TransportIncluded>
+        <PickUpPlace>Something</PickUpPlace>
+      </Term>
+    </Terms>
+  </Trip>
+</Trips>

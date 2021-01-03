@@ -38,7 +38,8 @@ namespace TripCourseReservation
         private static readonly string tripsDataRepoPath = connectionString_2.Substring(connectionString_2.IndexOf('=') + 1);
         private readonly string[] pathes = new string[] { coursesDataRepoPath, tripsDataRepoPath };
 
-        private string appPath = "";
+        TripsXSDValidation TripsXSDValidation = new TripsXSDValidation();
+        XSDValidation XSDValidation = new XSDValidation();
         #endregion
 
         #region Constructor
@@ -52,11 +53,8 @@ namespace TripCourseReservation
             {
                 MessageBox.Show(ex.InnerException.ToString());
             }
+
             RepoCreation.createDataFile(pathes);
-
-            appPath = Path.GetDirectoryName(
-                     Assembly.GetAssembly(typeof(MainWindow)).CodeBase);
-
             InitializeCourseData();
             InitializeTripData();
             DataContext = new MainWindowsVM();
@@ -219,25 +217,6 @@ namespace TripCourseReservation
         }
         #endregion
 
-        public string GetApplicationPath(string appname)
-        {
-            using (Microsoft.Win32.RegistryKey key = Microsoft.Win32.RegistryKey.OpenRemoteBaseKey(Microsoft.Win32.RegistryHive.LocalMachine, ""))
-            {
-                using (Microsoft.Win32.RegistryKey subkey = key.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\" + appname))
-                {
-                    if (subkey == null)
-                        return "";
-
-                    object path = subkey.GetValue("Path");
-
-                    if (path != null)
-                        return (string)path;
-                }
-
-            }
-            return "";
-        }
-
         private void onImportCourseData(object sender, RoutedEventArgs e)
         {
             // Create OpenFileDialog
@@ -247,26 +226,30 @@ namespace TripCourseReservation
             // Launch OpenFileDialog by calling ShowDialog method
             Nullable<bool> result = openFileDlg.ShowDialog();
 
-            var path = new Uri(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
-            XmlSchemaSet schema = new XmlSchemaSet();
-            schema.Add("", path + "\\" + CoursesXSDValidation.GetXSDpath());
-            XmlReader rd = XmlReader.Create(openFileDlg.FileName);
-            XDocument doc = XDocument.Load(rd);
-            doc.Validate(schema, ValidationEventHandler);
+            if (result == true)
+            {
+                var path = new Uri(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+                XmlSchemaSet schema = new XmlSchemaSet();
+                schema.Add("", path + "\\" + XSDValidation.GetCourseXSDpath());
+                XmlReader rd = XmlReader.Create(openFileDlg.FileName);
+                XDocument doc = XDocument.Load(rd);
+                doc.Validate(schema, ValidationEventHandler);
 
-            var dir = Path.GetDirectoryName(coursesDataRepoPath);
-            if (!Directory.Exists(dir))
-            {
-                Directory.CreateDirectory(dir);
-            }
-            if (File.Exists(coursesDataRepoPath))
-            {
-                File.Delete(coursesDataRepoPath);
-                File.Copy(openFileDlg.FileName, coursesDataRepoPath);
-            }
-            else
-            {
-                File.Copy(openFileDlg.FileName, coursesDataRepoPath);
+                var dir = Path.GetDirectoryName(coursesDataRepoPath);
+                if (!Directory.Exists(dir))
+                {
+                    Directory.CreateDirectory(dir);
+                }
+                if (File.Exists(coursesDataRepoPath))
+                {
+                    File.Delete(coursesDataRepoPath);
+                    File.Copy(openFileDlg.FileName, coursesDataRepoPath);
+                }
+                else
+                {
+                    File.Copy(openFileDlg.FileName, coursesDataRepoPath);
+                }
+                InitializeCourseData();
             }
         }
 
@@ -276,29 +259,34 @@ namespace TripCourseReservation
             Microsoft.Win32.OpenFileDialog openFileDlg = new Microsoft.Win32.OpenFileDialog();
             openFileDlg.DefaultExt = ".xml";
             openFileDlg.Filter = "Text documents (.xml)|*.xml";
+
             // Launch OpenFileDialog by calling ShowDialog method
             Nullable<bool> result = openFileDlg.ShowDialog();
 
-            var path = new Uri(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
-            XmlSchemaSet schema = new XmlSchemaSet();
-            schema.Add("", path + "\\" + CoursesXSDValidation.GetXSDpath());
-            XmlReader rd = XmlReader.Create(openFileDlg.FileName);
-            XDocument doc = XDocument.Load(rd);
-            doc.Validate(schema, ValidationEventHandler);
+            if (result == true)
+            {
+                var path = new Uri(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+                XmlSchemaSet schema = new XmlSchemaSet();
+                schema.Add("", path + "\\" + TripsXSDValidation.GetTripXSDpath());
+                XmlReader rd = XmlReader.Create(openFileDlg.FileName);
+                XDocument doc = XDocument.Load(rd);
+                doc.Validate(schema, ValidationEventHandler);
 
-            var dir = Path.GetDirectoryName(coursesDataRepoPath);
-            if (!Directory.Exists(dir))
-            {
-                Directory.CreateDirectory(dir);
-            }
-            if (File.Exists(coursesDataRepoPath))
-            {
-                File.Delete(coursesDataRepoPath);
-                File.Copy(openFileDlg.FileName, coursesDataRepoPath);
-            }
-            else
-            {
-                File.Copy(openFileDlg.FileName, coursesDataRepoPath);
+                var dir = Path.GetDirectoryName(tripsDataRepoPath);
+                if (!Directory.Exists(dir))
+                {
+                    Directory.CreateDirectory(dir);
+                }
+                if (File.Exists(tripsDataRepoPath))
+                {
+                    File.Delete(tripsDataRepoPath);
+                    File.Copy(openFileDlg.FileName, tripsDataRepoPath);
+                }
+                else
+                {
+                    File.Copy(openFileDlg.FileName, tripsDataRepoPath);
+                }
+                InitializeTripData();
             }
         }
 
@@ -317,7 +305,5 @@ namespace TripCourseReservation
                 }                
             }
         }
-
-        CoursesXSDValidation CoursesXSDValidation = new CoursesXSDValidation();
     }
 }
